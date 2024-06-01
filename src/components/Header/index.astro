@@ -1,0 +1,148 @@
+---
+import { type NavItem } from 'types';
+import Button from 'components/Button/index.astro';
+
+const navItems: NavItem = [
+  {
+    name: 'Home',
+  },
+  {
+    name: 'Research',
+    dropdown: [
+      {
+        name: 'Electronics and Neurotechnology Group'
+      },
+      {
+        name: 'Smart Materials Group'
+      },
+      {
+        name: 'Transient Sensory Interface Group'
+      }
+    ]
+  },
+  {
+    name: 'Teams',
+  },
+  {
+    name: 'Publications',
+  },
+  {
+    name: 'Resources',
+  },
+  {
+    name: 'Outreach',
+    dropdown: [
+      {
+        name: 'Images'
+      },
+      {
+        name: 'Videos'
+      },
+      {
+        name: 'Research Highlights'
+      }
+    ]
+  },
+  {
+    name: 'News',
+  },
+  {
+    name: 'Blog',
+    dropdown: [
+      {
+        name: 'News Archive'
+      }
+    ]
+  },  
+]
+---
+
+<header>
+  <img class="logo" src="https://www.melabresearch.com//images/2019/02/05/melab-logo-1549381256.png" alt="Logo do Vasco">
+  <nav>
+    <ul>
+      {navItems.map(({ href, name, dropdown}) => 
+        <li class="navli">
+          <a href={href}>
+            {name}
+            {dropdown && 
+            <>
+              <i class="fa fa-chevron-down nav-item-caret"></i>
+            </>
+            }
+          </a>
+          <div class="dropdown">
+            <ul>
+              {dropdown?.map(({href, name}) => 
+                <li class="dropdownli">
+                  <a href={href}>{name}</a>
+                </li>
+              )}
+            </ul>
+          </div>
+        </li>
+      )}
+    </ul>
+  </nav>
+  <Button>Join us</Button>
+</header>
+<style>
+  header {
+    display: flex;
+    justify-content: space-between;
+    background-color: rgb(248, 249, 250);
+    padding: 30px 15px 0px;
+    align-items: center;
+    position: relative;
+  }
+
+  .logo {
+    max-width: 250px;
+    max-height: 60px;
+  }
+
+  ul {
+    display: flex;
+  }
+
+  .navli {
+    cursor: pointer;
+    padding: 30px 30px;
+    font-weight: bold;
+    font-size: 18px;
+  }
+
+  .navli:hover {
+    color: rgb(2, 162, 93);  
+  }
+
+  .dropdownli {
+    color: black;
+    padding: 15px 30px;
+  }
+
+  .dropdownli:hover {
+    color: rgb(2, 162, 93);  
+  }
+
+  .dropdownli:hover .navli:hover {
+    color: black;
+  }
+
+  .dropdown {
+    display: none;
+    position: absolute;
+    top: 100%;
+    background-color: whitesmoke;
+  }
+
+  .dropdown ul {
+    display: flex;
+    flex-direction: column; 
+  }
+
+  .navli:hover .dropdown {
+    display: block;
+  }
+  
+</style>
